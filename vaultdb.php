@@ -150,7 +150,7 @@ class VaultDB {
 	public function groupaddmember($groupname, $uuid) {
 		$q=$this->db->query("SELECT * FROM groups WHERE groupname='$groupname'");
 		if ($q->num_rows) {
-			$r = $q->fetch_assoc()
+			$r = $q->fetch_assoc();
 			$members = json_decode(base64_decode($r["members"]), true);
 			
 			$memberprivatekey = $this->getprivkey($this->sessionuuid(), $this->sessionhash());	
@@ -478,7 +478,7 @@ class VaultDB {
 					$qg = $this->db->query("SELECT * FROM groups");
 					while ( $rg = $qg->fetch_assoc() ) {
 						$members = json_decode(base64_decode($rg["members"]), true);
-						if (isset($members[$uuid)) {
+						if (isset($members[$uuid])) {
 							$guid = $rg["id"];
 							$passwordhash = $this->sessionhash();
 							$privatekey = $this->getprivkey($guid, $passwordhash);
